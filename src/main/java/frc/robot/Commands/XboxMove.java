@@ -6,17 +6,17 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Controls;
-import frc.robot.Subsystems.Motor;
+import frc.robot.Subsystems.Drivebase;
 
 public class XboxMove extends Command {
   /** Creates a new XboxMove. */
-   Motor motor;
+   Drivebase drivebase;
    double speed;
 
-  public XboxMove(Motor m_motor) {
-    motor = m_motor;
+  public XboxMove(Drivebase m_drivebase) {
+    drivebase = m_drivebase;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(motor);
+    addRequirements(drivebase);
   }
 
   // Called when the command is initially scheduled.
@@ -30,13 +30,13 @@ public class XboxMove extends Command {
     double reverse = Controls.xbox_operator.getLeftTriggerAxis();
     
     if (reverse > 0.05 && throttle <= 0.05){
-      motor.move(-reverse);
+      drivebase.move(-reverse);
     }
     else if (throttle > 0.05 && reverse <= 0.05){
-      motor.move(throttle);
+      drivebase.move(throttle);
     }
     else{
-      motor.stop();
+      drivebase.stop();
     }
   }
 

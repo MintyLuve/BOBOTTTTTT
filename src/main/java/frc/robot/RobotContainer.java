@@ -7,28 +7,28 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Commands.MotorStop;
-import frc.robot.Commands.MoveBackward;
-import frc.robot.Commands.MoveForward;
+import frc.robot.Commands.DriveStop;
+import frc.robot.Commands.DriveBackward;
+import frc.robot.Commands.DriveForward;
 import frc.robot.Commands.XboxMove;
-import frc.robot.Subsystems.Motor;
+import frc.robot.Subsystems.Drivebase;
 import frc.robot.Controls;
 
 public class RobotContainer {
-  Motor motor = new Motor();
-  XboxMove xboxMove = new XboxMove(motor);
+  Drivebase drivebase = new Drivebase();
+  XboxMove xboxMove = new XboxMove(drivebase);
   private CommandXboxController operator = Controls.operator;
 
 
   public RobotContainer() {
-    motor.setDefaultCommand(xboxMove);
+    drivebase.setDefaultCommand(xboxMove);
     configureBindings();
   }
 
   private void configureBindings() {
-    //operator.rightTrigger().onTrue(new MoveForward(motor, operator.getRightTriggerAxis()));
-    //operator.leftTrigger().onTrue(new MoveBackward(motor, operator.getLeftTriggerAxis()));
-    operator.rightBumper().onTrue(new MotorStop(motor));
+    //operator.rightTrigger().onTrue(new MoveForward(drivebase, operator.getRightTriggerAxis()));
+    //operator.leftTrigger().onTrue(new MoveBackward(drivebase, operator.getLeftTriggerAxis()));
+    operator.rightBumper().onTrue(new DriveStop(drivebase));
 
   }
 

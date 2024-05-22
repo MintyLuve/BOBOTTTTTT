@@ -5,18 +5,18 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.Motor;
+import frc.robot.Subsystems.Drivebase;
 
-public class MoveBackward extends Command {
-  /** Creates a new MoveBackward. */
-  Motor motor;
+public class DriveBackward extends Command {
+  /** Creates a new driveBackward. */
+  Drivebase drivebase;
   double power;
 
-  public MoveBackward(Motor m_motor, double pow) {
-    motor = m_motor;
+  public DriveBackward(Drivebase m_drivebase, double pow) {
+    drivebase = m_drivebase;
     power = pow;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(motor);
+    addRequirements(drivebase);
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +26,7 @@ public class MoveBackward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    motor.backward();
+    drivebase.backward();
   }
 
   // Called once the command ends or is interrupted.

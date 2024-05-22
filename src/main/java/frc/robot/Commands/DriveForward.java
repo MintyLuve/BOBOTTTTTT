@@ -5,16 +5,18 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.Motor;
+import frc.robot.Subsystems.Drivebase;
 
-public class MotorStop extends Command {
-  /** Creates a new MotorStop. */
-  Motor motor;
+public class DriveForward extends Command {
+  /** Creates a new driveForward. */
+  Drivebase drivebase;
+  double power;
 
-  public MotorStop(Motor m_motor) {
-    motor = m_motor;
+  public DriveForward(Drivebase m_drivebase, double pow) {
+    drivebase = m_drivebase;
+    power = pow;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(motor);
+    addRequirements(drivebase);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +26,7 @@ public class MotorStop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    motor.stop();
+    drivebase.forward();
   }
 
   // Called once the command ends or is interrupted.
