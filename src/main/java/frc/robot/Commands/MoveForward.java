@@ -10,9 +10,11 @@ import frc.robot.Subsystems.Motor;
 public class MoveForward extends Command {
   /** Creates a new MoveForward. */
   Motor motor;
+  double power;
 
-  public MoveForward(Motor m_motor) {
+  public MoveForward(Motor m_motor, double pow) {
     motor = m_motor;
+    power = pow;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(motor);
   }

@@ -5,16 +5,16 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Controls;
 import frc.robot.Subsystems.Motor;
 
-public class MoveBackward extends Command {
-  /** Creates a new MoveBackward. */
-  Motor motor;
-  double power;
+public class XboxMove extends Command {
+  /** Creates a new XboxMove. */
+   Motor motor;
+   double speed;
 
-  public MoveBackward(Motor m_motor, double pow) {
+  public XboxMove(Motor m_motor) {
     motor = m_motor;
-    power = pow;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(motor);
   }
@@ -26,7 +26,18 @@ public class MoveBackward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    motor.backward();
+    double throttle = Controls.xbox_operator.getRightTriggerAxis();
+    double reverse = Controls.xbox_operator.getLeftTriggerAxis();
+    
+    if (reverse > 0.05 && throttle <= 0.05){
+      motor.move(-reverse);
+    }
+    else if (throttle > 0.05 && reverse <= 0.05){
+      motor.move(throttle);
+    }
+    else{
+      motor.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.

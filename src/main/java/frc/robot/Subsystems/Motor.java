@@ -14,7 +14,7 @@ public class Motor extends SubsystemBase {
     CANSparkMax motor;
 
     public Motor() {
-        motor = new CANSparkMax(0, MotorType.kBrushless);
+        motor = new CANSparkMax(1, MotorType.kBrushless);
 
     }
 
@@ -31,5 +31,8 @@ public class Motor extends SubsystemBase {
     }
     public void stop(){
         motor.set(0);
+    }
+    public void move(double speed){
+        motor.set(speed);
     }
 }

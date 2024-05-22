@@ -10,21 +10,26 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Commands.MotorStop;
 import frc.robot.Commands.MoveBackward;
 import frc.robot.Commands.MoveForward;
+import frc.robot.Commands.XboxMove;
 import frc.robot.Subsystems.Motor;
 import frc.robot.Controls;
 
 public class RobotContainer {
   Motor motor = new Motor();
-  CommandXboxController operator = Controls.operator;
+  XboxMove xboxMove = new XboxMove(motor);
+  private CommandXboxController operator = Controls.operator;
+
 
   public RobotContainer() {
+    motor.setDefaultCommand(xboxMove);
     configureBindings();
   }
 
   private void configureBindings() {
-    operator.rightTrigger().onTrue(new MoveForward(motor));
-    operator.leftTrigger().onTrue(new MoveBackward(motor));
+    //operator.rightTrigger().onTrue(new MoveForward(motor, operator.getRightTriggerAxis()));
+    //operator.leftTrigger().onTrue(new MoveBackward(motor, operator.getLeftTriggerAxis()));
     operator.rightBumper().onTrue(new MotorStop(motor));
+
   }
 
   public Command getAutonomousCommand(){
