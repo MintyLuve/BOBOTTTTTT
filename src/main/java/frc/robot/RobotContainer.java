@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Commands.MoveBackward;
 import frc.robot.Commands.MoveForward;
 import frc.robot.Subsystems.Motor;
 import frc.robot.Controls;
@@ -21,6 +22,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     operator.rightTrigger().onTrue(new MoveForward(motor));
+    operator.leftTrigger().onTrue(new MoveBackward(motor));
   }
 
   public Command getAutonomousCommand(){
