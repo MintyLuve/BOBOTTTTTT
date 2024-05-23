@@ -11,18 +11,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivebase extends SubsystemBase {
     /** Creates a new Motor. */
+    //declare motors
     CANSparkMax left_motor_1;
     CANSparkMax left_motor_2;
     CANSparkMax right_motor_1;
     CANSparkMax right_motor_2;
 
-
     public Drivebase() {
+        //init motors
         left_motor_1 = new CANSparkMax(1, MotorType.kBrushed);
         left_motor_2 = new CANSparkMax(2, MotorType.kBrushed);
         right_motor_1 = new CANSparkMax(3, MotorType.kBrushed);
         right_motor_2 = new CANSparkMax(4, MotorType.kBrushed);
 
+        //sets motor 2 to follow motor 1
         left_motor_2.follow(left_motor_1);
         right_motor_2.follow(right_motor_1);
     }
@@ -32,6 +34,7 @@ public class Drivebase extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
+    // movement functions
     public void forward(){
         left_motor_1.set(1);
         right_motor_1.set(1);
