@@ -27,13 +27,33 @@ public class XboxMove extends Command {
   @Override
   public void execute() {
     double throttle = Controls.xbox_operator.getRightTriggerAxis();
-    double reverse = Controls.xbox_operator.getLeftTriggerAxis();
-    
-    if (reverse > 0.05 && throttle <= 0.05){
-      drivebase.move(-reverse);
+    double reverse = -Controls.xbox_operator.getLeftTriggerAxis();
+    double turn = Controls.xbox_operator.getLeftX();
+
+   
+
+    if (-reverse >= 0.05 && throttle <= 0.05){
+      drivebase.move(reverse, reverse);
+      if (turn >= 0.2){
+        drivebase.move(reverse, reverse*(1-turn));
+      }
+      else if (turn <= -0.2){
+        drivebase.move(reverse*(1+turn), reverse);
+      }
+      else{
+        drivebase.move(reverse, reverse);
+      }
     }
-    else if (throttle > 0.05 && reverse <= 0.05){
-      drivebase.move(throttle);
+    else if (throttle >= 0.05 && -reverse <= 0.05){
+      if (turn >= 0.2){
+        drivebase.move(throttle, throttle*(1-turn));
+      }
+      else if (turn <= -0.2){
+        drivebase.move(throttle*(1+turn), throttle);
+      }
+      else{
+        drivebase.move(throttle, throttle);
+      }
     }
     else{
       drivebase.stop();

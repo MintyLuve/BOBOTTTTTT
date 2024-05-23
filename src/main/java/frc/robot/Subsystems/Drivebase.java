@@ -44,8 +44,8 @@ public class Drivebase extends SubsystemBase {
         left_motor_1.set(0);
         right_motor_1.set(0);
     }
-    public void move(double speed){
-        left_motor_1.set(speed);
-        right_motor_1.set(speed);
+    public void move(double left, double right){
+        left_motor_1.set(left);
+        right_motor_1.set(right);
     }
 }
