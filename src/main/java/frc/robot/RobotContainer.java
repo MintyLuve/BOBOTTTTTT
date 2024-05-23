@@ -28,7 +28,7 @@ public class RobotContainer {
   private void configureBindings() {
     //operator.rightTrigger().onTrue(new MoveForward(drivebase, operator.getRightTriggerAxis()));
     //operator.leftTrigger().onTrue(new MoveBackward(drivebase, operator.getLeftTriggerAxis()));
-    operator.rightBumper().onTrue(new DriveStop(drivebase));
+    operator.rightBumper().whileTrue(new DriveStop(drivebase));
 
   }
 
