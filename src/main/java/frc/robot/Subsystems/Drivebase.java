@@ -25,6 +25,8 @@ public class Drivebase extends SubsystemBase {
 
         left_motor_2.follow(left_motor_1);
         right_motor_2.follow(right_motor_1);
+
+        left_motor_1.setInverted(true);
     }
 
     @Override

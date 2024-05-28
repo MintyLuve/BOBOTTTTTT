@@ -29,10 +29,8 @@ public class XboxMove extends Command {
     double throttle = Controls.xbox_operator.getRightTriggerAxis();
     double reverse = -Controls.xbox_operator.getLeftTriggerAxis();
     double turn = Controls.xbox_operator.getLeftX();
-
-   
-
-    if (-reverse >= 0.05 && throttle <= 0.05){
+    
+    if (Math.abs(reverse) >= 0.05 && throttle <= 0.05){
       drivebase.move(reverse, reverse);
    
 
