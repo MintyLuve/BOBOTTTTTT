@@ -26,11 +26,12 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //init throttle, reverse, turn, and power
+    //init variables
     double throttle = Controls.xbox_operator.getRightTriggerAxis();
     double reverse = -1 * Controls.xbox_operator.getLeftTriggerAxis();
     double turn = Controls.xbox_operator.getLeftX();
     double power = throttle + reverse;
+    boolean pirouette = Controls.xbox_operator.getLeftStickButton();
   
     // if moving forward
     if (throttle >= 0.05 && Math.abs(reverse) <= 0.05){
@@ -43,6 +44,18 @@ public class XboxMove extends Command {
     // if not moving
     else{
       drivebase.stop();
+    }
+
+    //piroutette
+    if (pirouette){
+      //turning left
+      if (turn < 0.05){
+        drivebase.move(-1 * Math.abs(turn), Math.abs(turn));
+      }
+      //turning right
+      else if (turn > 0.05) {
+        drivebase.move(Math.abs(turn), -1 * Math.abs(turn));
+      }
     }
   }
 
