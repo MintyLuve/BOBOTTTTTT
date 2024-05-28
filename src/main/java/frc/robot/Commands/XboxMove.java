@@ -6,6 +6,7 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Controls;
 import frc.robot.Subsystems.Drivebase;
 
@@ -27,6 +28,7 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double sensitivity = Constants.ControllerConstants.CONTROLLER_SENSITIVITY;
     XboxController driver = Controls.xbox_driver;
     //get controller inputs
     double throttle = driver.getRightTriggerAxis();
@@ -38,7 +40,7 @@ public class XboxMove extends Command {
     //gets percent
     double percent = 1;
     if (precision){
-      percent = 0.3;
+      percent = Constants.ControllerConstants.PRECISION_PRECENT;
     }
     if (stop){
       percent = 0;
@@ -48,11 +50,11 @@ public class XboxMove extends Command {
     double turn = driver.getLeftX() * percent;
 
     // if moving forward
-    if (throttle >= 0.05 && Math.abs(reverse) <= 0.05){
+    if (throttle >= sensitivity && Math.abs(reverse) <= sensitivity){
       drivebase.move(power*(1+turn), power*(1-turn));
     }
     // if moving backward
-    else if (Math.abs(reverse) >= 0.05 && throttle <= 0.05){
+    else if (Math.abs(reverse) >= sensitivity && throttle <= sensitivity){
       drivebase.move(power*(1+turn), power*(1-turn));
     }
     // if not moving
@@ -63,11 +65,11 @@ public class XboxMove extends Command {
     //piroutette
     if (pirouette){
       //turning left
-      if (turn < 0.05){
+      if (turn < sensitivity){
         drivebase.move(-1 * Math.abs(turn), Math.abs(turn));
       }
       //turning right
-      else if (turn > 0.05) {
+      else if (turn > sensitivity) {
         drivebase.move(Math.abs(turn), -1 * Math.abs(turn));
       }
     }
