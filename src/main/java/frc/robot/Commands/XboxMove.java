@@ -33,7 +33,6 @@ public class XboxMove extends Command {
    
     //moves backward
     if (reverse >= -0.05 && throttle <= 0.05){
-      drivebase.move(reverse, reverse);
       // turns right
       if (turn >= 0.2){
         drivebase.move(reverse, reverse*(1-turn));
