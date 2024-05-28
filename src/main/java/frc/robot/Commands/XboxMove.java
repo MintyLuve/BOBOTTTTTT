@@ -57,7 +57,7 @@ public class XboxMove extends Command {
     }
     // if not moving
     else{
-      drivebase.stop();
+      drivebase.move(0, 0);
     }
 
     //piroutette

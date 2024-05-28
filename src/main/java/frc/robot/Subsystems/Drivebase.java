@@ -41,18 +41,6 @@ public class Drivebase extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    public void forward(){
-        left_motor_1.set(1);
-        right_motor_1.set(1);
-    }
-    public void backward(){
-        left_motor_1.set(-1);
-        right_motor_1.set(-1);
-    }
-    public void stop(){
-        left_motor_1.set(0);
-        right_motor_1.set(0);
-    }
     public void move(double left, double right){
         left_motor_1.set(left);
         right_motor_1.set(right);
