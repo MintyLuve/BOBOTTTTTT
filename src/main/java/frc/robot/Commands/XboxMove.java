@@ -4,6 +4,7 @@
 
 package frc.robot.Commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Controls;
 import frc.robot.Subsystems.Drivebase;
@@ -26,20 +27,22 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    XboxController driver = Controls.xbox_driver;
     //get controller inputs
-    double throttle = Controls.xbox_operator.getRightTriggerAxis();
-    double reverse = -1 * Controls.xbox_operator.getLeftTriggerAxis();
-    boolean pirouette = Controls.xbox_operator.getLeftStickButton();
-    boolean precision = Controls.xbox_operator.getRightBumper();
+    double throttle = driver.getRightTriggerAxis();
+    double reverse = -1 * driver.getLeftTriggerAxis();
+    boolean pirouette = driver.getLeftStickButton();
+    boolean precision = driver.getRightBumper();
     
-    //gets precision
+    //gets percent
     double percent = 1;
     if (precision){
       percent = 0.3;
     }
+
     // calc power + get turn
     double power = (throttle + reverse) * percent;
-    double turn = Controls.xbox_operator.getLeftX() * percent;
+    double turn = driver.getLeftX() * percent;
 
     // if moving forward
     if (throttle >= 0.05 && Math.abs(reverse) <= 0.05){
