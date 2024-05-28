@@ -8,11 +8,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Commands.DriveStop;
-import frc.robot.Commands.DriveBackward;
-import frc.robot.Commands.DriveForward;
 import frc.robot.Commands.XboxMove;
 import frc.robot.Subsystems.Drivebase;
-import frc.robot.Controls;
 
 public class RobotContainer {
   Drivebase drivebase = new Drivebase();
@@ -26,8 +23,6 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    //operator.rightTrigger().onTrue(new MoveForward(drivebase, operator.getRightTriggerAxis()));
-    //operator.leftTrigger().onTrue(new MoveBackward(drivebase, operator.getLeftTriggerAxis()));
     operator.rightBumper().whileTrue(new DriveStop(drivebase));
 
   }

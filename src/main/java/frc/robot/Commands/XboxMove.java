@@ -26,35 +26,21 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //init throttle, reverse, turn, and power
     double throttle = Controls.xbox_operator.getRightTriggerAxis();
-    double reverse = -Controls.xbox_operator.getLeftTriggerAxis();
+    double reverse = -1 * Controls.xbox_operator.getLeftTriggerAxis();
     double turn = Controls.xbox_operator.getLeftX();
-    
-    if (Math.abs(reverse) >= 0.05 && throttle <= 0.05){
-      drivebase.move(reverse, reverse);
-   
-
-      if (turn >= 0.2){
-        drivebase.move(reverse, reverse*(1-turn));
-      }
-      else if (turn <= -0.2){
-        drivebase.move(reverse*(1+turn), reverse);
-      }
-      else{
-        drivebase.move(reverse, reverse);
-      }
+    double power = throttle + reverse;
+  
+    // if moving forward
+    if (throttle >= 0.05 && Math.abs(reverse) <= 0.05){
+      drivebase.move(power*(1+turn), power*(1-turn));
     }
-    else if (throttle >= 0.05 && -reverse <= 0.05){
-      if (turn >= 0.2){
-        drivebase.move(throttle, throttle*(1-turn));
-      }
-      else if (turn <= -0.2){
-        drivebase.move(throttle*(1+turn), throttle);
-      }
-      else{
-        drivebase.move(throttle, throttle);
-      }
+    // if moving backward
+    else if (Math.abs(reverse) >= 0.05 && throttle <= 0.05){
+      drivebase.move(power*(1+turn), power*(1-turn));
     }
+    // if not moving
     else{
       drivebase.stop();
     }
