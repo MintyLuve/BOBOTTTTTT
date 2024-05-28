@@ -23,7 +23,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    operator.rightBumper().whileTrue(new DriveStop(drivebase));
+    operator.leftBumper().whileTrue(new DriveStop(drivebase));
 
   }
 
