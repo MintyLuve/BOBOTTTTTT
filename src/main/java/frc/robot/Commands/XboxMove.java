@@ -33,13 +33,16 @@ public class XboxMove extends Command {
     double reverse = -1 * driver.getLeftTriggerAxis();
     boolean pirouette = driver.getLeftStickButton();
     boolean precision = driver.getRightBumper();
+    boolean stop = driver.getLeftBumper();
     
     //gets percent
     double percent = 1;
     if (precision){
       percent = 0.3;
     }
-
+    if (stop){
+      percent = 0;
+    }
     // calc power + get turn
     double power = (throttle + reverse) * percent;
     double turn = driver.getLeftX() * percent;
