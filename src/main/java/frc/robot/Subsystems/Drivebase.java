@@ -8,7 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import frc.robot.Constants.DrivebaseConstants;
-
+import frc.robot.Constants.DumbConstants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivebase extends SubsystemBase {
@@ -45,5 +45,10 @@ public class Drivebase extends SubsystemBase {
     public void move(double left, double right){
         left_motor_1.set(left);
         right_motor_1.set(right);
+    }
+
+    public void stop(){
+        left_motor_1.set(DumbConstants.STOPPED_PERCENT);
+        left_motor_2.set(DumbConstants.STOPPED_PERCENT);
     }
 }

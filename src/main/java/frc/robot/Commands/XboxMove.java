@@ -28,22 +28,23 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    int constVar = Constants.DumbConstants.THE_NUMBER_ONE;
     double sensitivity = Constants.ControllerConstants.CONTROLLER_SENSITIVITY;
     XboxController driver = Controls.xbox_driver;
     //get controller inputs
     double throttle = driver.getRightTriggerAxis();
-    double reverse = -1 * driver.getLeftTriggerAxis();
+    double reverse = - driver.getLeftTriggerAxis();
     boolean pirouette = driver.getLeftStickButton();
     boolean precision = driver.getRightBumper();
     boolean stop = driver.getLeftBumper();
     
     //gets percent
-    double percent = 1;
+    double percent = constVar;
     if (precision){
       percent = Constants.ControllerConstants.PRECISION_PRECENT;
     }
     if (stop){
-      percent = 0;
+      percent = Constants.DumbConstants.STOPPED_PERCENT;
     }
     // calc power + get turn
     double power = (throttle + reverse) * percent;
@@ -51,26 +52,26 @@ public class XboxMove extends Command {
 
     // if moving forward
     if (throttle >= sensitivity && Math.abs(reverse) <= sensitivity){
-      drivebase.move(power*(1+turn), power*(1-turn));
+      drivebase.move(power*(constVar+turn), power*(constVar-turn));
     }
     // if moving backward
     else if (Math.abs(reverse) >= sensitivity && throttle <= sensitivity){
-      drivebase.move(power*(1+turn), power*(1-turn));
+      drivebase.move(power*(constVar+turn), power*(constVar-turn));
     }
     // if not moving
     else{
-      drivebase.move(0, 0);
+      drivebase.stop();
     }
 
     //piroutette
     if (pirouette){
       //turning left
       if (turn < sensitivity){
-        drivebase.move(-1 * Math.abs(turn), Math.abs(turn));
+        drivebase.move(-constVar * Math.abs(turn), Math.abs(turn));
       }
       //turning right
       else if (turn > sensitivity) {
-        drivebase.move(Math.abs(turn), -1 * Math.abs(turn));
+        drivebase.move(Math.abs(turn), -constVar * Math.abs(turn));
       }
     }
   }
