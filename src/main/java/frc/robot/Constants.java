@@ -17,6 +17,6 @@ public class Constants {
     
     public static class DumbConstants{
         public static final int STOPPED_PERCENT = 0;
-        public static final int THE_NUMBER_ONE = 1;
+        public static final int FULL_POWER_PERCENT = 1;
     }
 }

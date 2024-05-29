@@ -28,7 +28,7 @@ public class XboxMove extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int constVar = Constants.DumbConstants.THE_NUMBER_ONE;
+    int fullPower = Constants.DumbConstants.FULL_POWER_PERCENT;
     double sensitivity = Constants.ControllerConstants.CONTROLLER_SENSITIVITY;
     XboxController driver = Controls.xbox_driver;
     //get controller inputs
@@ -39,7 +39,7 @@ public class XboxMove extends Command {
     boolean stop = driver.getLeftBumper();
     
     //gets percent
-    double percent = constVar;
+    double percent = fullPower;
     if (precision){
       percent = Constants.ControllerConstants.PRECISION_PRECENT;
     }
@@ -52,11 +52,11 @@ public class XboxMove extends Command {
 
     // if moving forward
     if (throttle >= sensitivity && Math.abs(reverse) <= sensitivity){
-      drivebase.move(power*(constVar+turn), power*(constVar-turn));
+      drivebase.move(power*(fullPower+turn), power*(fullPower-turn));
     }
     // if moving backward
     else if (Math.abs(reverse) >= sensitivity && throttle <= sensitivity){
-      drivebase.move(power*(constVar+turn), power*(constVar-turn));
+      drivebase.move(power*(fullPower+turn), power*(fullPower-turn));
     }
     // if not moving
     else{
@@ -67,11 +67,11 @@ public class XboxMove extends Command {
     if (pirouette){
       //turning left
       if (turn < sensitivity){
-        drivebase.move(-constVar * Math.abs(turn), Math.abs(turn));
+        drivebase.move(-fullPower * Math.abs(turn), Math.abs(turn));
       }
       //turning right
       else if (turn > sensitivity) {
-        drivebase.move(Math.abs(turn), -constVar * Math.abs(turn));
+        drivebase.move(Math.abs(turn), -fullPower * Math.abs(turn));
       }
     }
   }
